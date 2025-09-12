@@ -7,6 +7,15 @@ module.exports = {
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Montserrat_400Regular', 'system-ui', 'sans-serif'],
+        'sans-normal': ['Montserrat_400Regular'],
+        'sans-medium': ['Montserrat_500Medium'], 
+        'sans-semibold': ['Montserrat_600SemiBold'],
+        'sans-bold': ['Montserrat_700Bold'],
+        'sans-extrabold': ['Montserrat_800ExtraBold'],
+        'sans-black': ['Montserrat_900Black'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

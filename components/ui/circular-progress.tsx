@@ -105,8 +105,10 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           >
             {Math.round(progress)}%
           </Text>
+          <Text className='font-sans-semibold text-zinc-400'>1 of 4 session</Text>
         </View>
       )}
+      
     </View>
   );
 };
