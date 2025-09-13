@@ -43,7 +43,7 @@ export function SelectPreview() {
     <>
       
       <Select>
-            <SelectTrigger onTouchStart={onTouchStart}>
+            <SelectTrigger onTouchStart={onTouchStart} ref={ref}>
               <SelectValue
                 className="text-foreground text-sm native:text-lg"
                 placeholder="Select a role"

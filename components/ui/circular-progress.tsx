@@ -20,6 +20,8 @@ interface CircularProgressBarProps {
   showPercentage?: boolean;
   textColor?: string;
   fontSize?: number;
+  title?: string;
+  subtitle?: string;
 }
 
 const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
@@ -32,6 +34,8 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   showPercentage = true,
   textColor = '#1f2937',
   fontSize = 20,
+  title = '',
+  subtitle = '',
 }) => {
   const animatedProgress = useSharedValue(0);
   
@@ -103,9 +107,10 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
               color: textColor,
             }}
           >
-            {Math.round(progress)}%
+            {/* {Math.round(progress)}% */}
+            {title}
           </Text>
-          <Text className='font-sans-semibold text-zinc-400'>1 of 4 session</Text>
+          <Text className='font-sans-semibold text-zinc-400'>{subtitle}</Text>
         </View>
       )}
       
