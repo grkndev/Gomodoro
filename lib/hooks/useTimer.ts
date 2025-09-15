@@ -23,6 +23,7 @@ export const useTimer = ({
 }: UseTimerProps = {}): UseTimerReturn => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const backgroundTimeRef = useRef<number | null>(null);
+  const completionCalledRef = useRef<boolean>(false);
   
   const initialTime = initialMinutes * 60; // Convert to seconds
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
@@ -49,7 +50,10 @@ export const useTimer = ({
         if (prev <= 1) {
           setIsRunning(false);
           setIsCompleted(true);
-          onComplete?.();
+          if (!completionCalledRef.current) {
+            completionCalledRef.current = true;
+            onComplete?.();
+          }
           return 0;
         }
         return prev - 1;
@@ -71,6 +75,7 @@ export const useTimer = ({
     setIsRunning(false);
     setIsCompleted(false);
     setTimeRemaining(initialTime);
+    completionCalledRef.current = false;
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -92,7 +97,10 @@ export const useTimer = ({
           if (newTime <= 0) {
             setIsRunning(false);
             setIsCompleted(true);
-            onComplete?.();
+            if (!completionCalledRef.current) {
+              completionCalledRef.current = true;
+              onComplete?.();
+            }
           }
           return newTime;
         });

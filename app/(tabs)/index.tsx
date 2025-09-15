@@ -10,7 +10,7 @@ export default function HomeScreen() {
       <SelectPreview />
 
       <PomodoroTimer
-        initialMinutes={25}
+        initialMinutes={0.1}
         onComplete={() => {
           console.log("Pomodoro session completed from HomeScreen!");
         }}
