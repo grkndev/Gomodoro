@@ -38,11 +38,12 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={NAV_THEME["light"]}>
-      <PortalHost />
+      
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         
       </Stack>
+      <PortalHost />
       <StatusBar style="auto" />
     </ThemeProvider>
   );
