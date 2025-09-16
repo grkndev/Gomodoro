@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Animated, {
   interpolate,
   useAnimatedProps,
@@ -7,6 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import Svg, { Circle, G } from 'react-native-svg';
+import { Text } from './text';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -101,13 +102,9 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           }}
         >
           <Text
-            style={{
-              fontSize: fontSize,
-              fontWeight: 'bold',
-              color: textColor,
-            }}
+            className='font-sans-semibold text-zinc-900 text-5xl'
           >
-            {/* {Math.round(progress)}% */}
+        
             {title}
           </Text>
           <Text className='font-sans-semibold text-zinc-400'>{subtitle}</Text>
