@@ -16,7 +16,7 @@ interface PomodoroTimerProps {
 }
 
 export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
-  initialSeconds = 25,
+  initialSeconds = 25 * 60,
   onComplete,
   size = 256,
   strokeWidth = 16,
