@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 
 interface UseTimerProps {
-  initialMinutes?: number;
+  initialSeconds?: number;
   onComplete?: () => void;
 }
 
@@ -18,14 +18,14 @@ interface UseTimerReturn {
 }
 
 export const useTimer = ({ 
-  initialMinutes = 25, 
+  initialSeconds = 25 * 60, 
   onComplete 
 }: UseTimerProps = {}): UseTimerReturn => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const backgroundTimeRef = useRef<number | null>(null);
   const completionCalledRef = useRef<boolean>(false);
   
-  const initialTime = initialMinutes * 60; // Convert to seconds
+  const initialTime = initialSeconds;
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);

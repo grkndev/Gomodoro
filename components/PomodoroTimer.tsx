@@ -6,7 +6,7 @@ import React from "react";
 import { View } from "react-native";
 
 interface PomodoroTimerProps {
-  initialMinutes?: number;
+  initialSeconds?: number;
   onComplete?: () => void;
   size?: number;
   strokeWidth?: number;
@@ -16,7 +16,7 @@ interface PomodoroTimerProps {
 }
 
 export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
-  initialMinutes = 25,
+  initialSeconds = 25 * 60,
   onComplete,
   size = 256,
   strokeWidth = 16,
@@ -34,7 +34,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
     pauseTimer, 
     resetTimer 
   } = useTimer({ 
-    initialMinutes,
+    initialSeconds,
     onComplete: () => {
       // Timer completed, could add notification or sound here
       console.log("Pomodoro session completed!");
