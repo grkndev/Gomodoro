@@ -18,7 +18,7 @@ interface UseTimerReturn {
 }
 
 export const useTimer = ({ 
-  initialSeconds = 25, 
+  initialSeconds = 25 * 60, 
   onComplete 
 }: UseTimerProps = {}): UseTimerReturn => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
