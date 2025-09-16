@@ -88,8 +88,8 @@ const TaskSheet = () => {
           className="flex-1 px-5"
           style={{
             paddingBottom: Platform.select({
-              ios: insets.bottom,
-              android: insets.bottom + 16,
+              ios: insets.bottom + 12,
+              android: insets.bottom * 2 + 12,
             }),
           }}
         >
