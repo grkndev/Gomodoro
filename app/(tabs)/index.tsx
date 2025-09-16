@@ -1,13 +1,15 @@
 import { AlertDialogPreview } from "@/components/AlertDialogPreview";
 import { PomodoroTimer } from "@/components/PomodoroTimer";
-import { SelectPreview } from "@/components/TestSelect";
+import TaskSheet from "@/components/TaskSheet";
 import React from "react";
 import { View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 items-center justify-center gap-16">
-      <SelectPreview />
+    <View className="flex-1 items-center justify-center gap-8 px-6">
+     
+        <TaskSheet />
+     
 
       <PomodoroTimer
         initialSeconds={25 * 60}

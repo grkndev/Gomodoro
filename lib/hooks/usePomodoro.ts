@@ -41,3 +41,7 @@ function createPomodoro() {}
 function currentPomodoro() {
   return dummyPomodoro;
 }
+
+export { createPomodoro, currentPomodoro, getPomodoro };
+export type { Pomodoro };
+
