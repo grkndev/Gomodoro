@@ -25,7 +25,7 @@ export const useTimer = ({
   const backgroundTimeRef = useRef<number | null>(null);
   const completionCalledRef = useRef<boolean>(false);
   
-  const initialTime = initialSeconds; // Convert to seconds
+  const initialTime = initialSeconds;
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
