@@ -1,9 +1,9 @@
 import { Text } from "@/components/ui/text";
 import { currentPomodoro } from "@/lib/hooks/usePomodoro";
 import {
-    BottomSheetBackdrop,
-    BottomSheetModal,
-    BottomSheetView
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetView
 } from "@gorhom/bottom-sheet";
 import React, { useCallback, useRef } from "react";
 import { TouchableOpacity, View } from "react-native";
@@ -33,8 +33,8 @@ const TaskSheet = () => {
         <BottomSheetModal
           ref={bottomSheetModalRef}
           onChange={handleSheetChanges}
-          enableDynamicSizing={false}
-          snapPoints={["45%", "75%"]}
+          enableDynamicSizing={true}
+          // snapPoints={["45%", "75%"]}
           enablePanDownToClose={true}
           enableDismissOnClose={true}
           backgroundStyle={{
@@ -56,8 +56,8 @@ const TaskSheet = () => {
             />
           )}
         >
-          <BottomSheetView className="flex-1 px-5 pt-2.5">
-            <Text className="text-xl font-bold text-gray-900 mb-4">
+          <BottomSheetView className="flex-1 px-5 pb-4">
+            <Text className="text-xl font-sans-semibold text-gray-900 mb-4">
               Select Pomodoro Session
             </Text>
             
