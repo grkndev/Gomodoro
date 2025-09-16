@@ -25,7 +25,7 @@ export const TaskButton: React.FC<TaskButtonProps> = ({
   onPress,
 }) => {
   const renderSessionDurations = () => {
-    return sessions.map((session, index) => (
+    return sessions.sort((a, b) => a.step - b.step).map((session, index) => (
       <View key={session.id} className="flex-row items-center">
         <Text className="text-xs text-gray-600">
           {formatDuration(session.total_seconds)}
