@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import React, { useEffect } from "react";
+import { View } from "react-native";
 import Animated, {
   interpolate,
   useAnimatedProps,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import Svg, { Circle, G } from 'react-native-svg';
-import { Text } from './text';
+} from "react-native-reanimated";
+import Svg, { Circle, G } from "react-native-svg";
+import { Text } from "./text";
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -30,16 +30,16 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   strokeWidth = 10,
   progress = 0,
   duration = 1000,
-  color = '#3b82f6',
-  backgroundColor = '#e5e7eb',
+  color = "#3b82f6",
+  backgroundColor = "#e5e7eb",
   showPercentage = true,
-  textColor = '#1f2937',
+  textColor = "#1f2937",
   fontSize = 20,
-  title = '',
-  subtitle = '',
+  title = "",
+  subtitle = "",
 }) => {
   const animatedProgress = useSharedValue(0);
-  
+
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const centerX = size / 2;
@@ -64,7 +64,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   });
 
   return (
-    <View style={{ width: size, height: size, position: 'relative' }}>
+    <View style={{ width: size, height: size, position: "relative" }}>
       <Svg width={size} height={size}>
         <G rotation="-90" originX={centerX} originY={centerY}>
           {/* Background circle */}
@@ -92,25 +92,24 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
       {showPercentage && (
         <View
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Text
-            className='font-sans-semibold text-zinc-900 text-5xl'
+            className="font-sans-bold text-zinc-900 text-6xl"
+           
           >
-        
             {title}
           </Text>
-          <Text className='font-sans-semibold text-zinc-400'>{subtitle}</Text>
+          <Text className="font-sans-semibold text-zinc-400">{subtitle}</Text>
         </View>
       )}
-      
     </View>
   );
 };

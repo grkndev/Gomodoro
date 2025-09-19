@@ -10,6 +10,10 @@ export default function TabLayout() {
         header: () => <Header />,
         tabBarActiveTintColor: "black",
         headerShown: true,
+        tabBarStyle: {
+          backgroundColor: "white",
+          shadowColor: "white",
+        },
 
         // tabBarButton: () => null,
         tabBarShowLabel: false,

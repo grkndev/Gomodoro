@@ -1,32 +1,40 @@
-import { ActionButton } from "@/components/ui/action-button";
-import CircularProgressBar from "@/components/ui/circular-progress";
-import { Text } from "@/components/ui/text";
-import { useTimer } from "@/lib/hooks/useTimer";
+/**
+ * Pomodoro Timer Component
+ * A beautiful, animated timer for the Pomodoro Technique with state management
+ */
+
 import React from "react";
 import { View } from "react-native";
+import Animated from "react-native-reanimated";
 
-interface PomodoroTimerProps {
-  initialSeconds?: number;
-  onComplete?: () => void;
-  size?: number;
-  strokeWidth?: number;
-  fontSize?: number;
-  current_session: number;
-  total_sessions: number;
-}
+import CircularProgressBar from "@/components/ui/circular-progress";
+import { PomodoroButton } from "@/components/ui/pomodoro-button";
+import { LAYOUT_DIMENSIONS, POMODORO_COLORS, POMODORO_DEFAULTS } from "@/lib/constants/pomodoro";
+import { usePomodoroAnimations } from "@/lib/hooks/usePomodoroAnimations";
+import { useTimer } from "@/lib/hooks/useTimer";
+import type { PomodoroTimerProps } from "@/lib/types/pomodoro";
+import {
+  formatSessionInfo,
+  getMainButtonConfig,
+  getSplitButtonsConfig,
+  getTimerState,
+} from "@/lib/utils/pomodoroHelpers";
+
 
 export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
-  initialSeconds = 25 * 60,
+  initialSeconds = POMODORO_DEFAULTS.INITIAL_SECONDS,
   onComplete,
-  size = 256,
-  strokeWidth = 16,
-  fontSize = 48,
-  current_session = 0,
-  total_sessions = 0,
+  size = LAYOUT_DIMENSIONS.DEFAULT_SIZE,
+  strokeWidth = LAYOUT_DIMENSIONS.DEFAULT_STROKE_WIDTH,
+  fontSize = LAYOUT_DIMENSIONS.DEFAULT_FONT_SIZE,
+  currentSession = 1,
+  totalSessions = POMODORO_DEFAULTS.DEFAULT_SESSIONS,
 }) => {
+  // Timer logic
   const { 
     timeRemaining, 
     isRunning, 
+    isPaused,
     isCompleted, 
     progress, 
     formattedTime, 
@@ -36,26 +44,28 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   } = useTimer({ 
     initialSeconds,
     onComplete: () => {
-      // Timer completed, could add notification or sound here
       console.log("Pomodoro session completed!");
       onComplete?.();
     }
   });
 
-  const handleTimerAction = () => {
-    if (isCompleted) {
-      resetTimer();
-    } else if (isRunning) {
-      pauseTimer();
-    } else {
-      startTimer();
-    }
-  };
+  // Determine current state and get animations
+  const timerState = getTimerState(isRunning, isPaused, isCompleted);
+  const animations = usePomodoroAnimations(timerState);
 
-  const getButtonText = () => {
-    if (isCompleted) return "Reset Timer";
-    return isRunning ? "Pause" : "Start";
-  };  
+  // Button configurations
+  const mainButtonConfig = getMainButtonConfig(timerState, {
+    onStart: startTimer,
+    onPause: pauseTimer,
+    onReset: resetTimer,
+  });
+
+  const splitButtonsConfig = getSplitButtonsConfig({
+    onResume: startTimer,
+    onStop: resetTimer,
+  });
+
+
 
   return (
     <View className="items-center gap-16 w-full">
@@ -64,17 +74,59 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         fontSize={fontSize}
         size={size}
         strokeWidth={strokeWidth}
-        color={"#17CB17"}
+        color={POMODORO_COLORS.PRIMARY_GREEN}
         title={formattedTime}
-        subtitle={`${current_session} of ${total_sessions} session`}
+        subtitle={formatSessionInfo(currentSession, totalSessions)}
       />
 
-      <View className="w-2/3 px-4">
-        <ActionButton onPress={handleTimerAction}>
-          <Text className="text-xl font-sans-semibold text-white">
-            {getButtonText()}
-          </Text>
-        </ActionButton>
+      <View 
+        className="w-full items-center justify-center" 
+        style={{ minHeight: LAYOUT_DIMENSIONS.BUTTON_CONTAINER_MIN_HEIGHT }}
+      >
+        {/* Main morphing button - appears for idle, running, completed states */}
+        {timerState !== 'paused' && (
+          <Animated.View 
+            style={[animations.morphingButtonStyle, { width: LAYOUT_DIMENSIONS.MAIN_BUTTON_WIDTH, position: 'absolute' }]}
+            className="rounded-full"
+          >
+            <PomodoroButton 
+              config={mainButtonConfig}
+              className="w-full bg-transparent border-transparent"
+            />
+          </Animated.View>
+        )}
+
+        {/* Split buttons container - appears when paused */}
+        {timerState === 'paused' && (
+          <Animated.View 
+            style={[animations.splitContainerStyle, { width: LAYOUT_DIMENSIONS.SPLIT_CONTAINER_WIDTH }]}
+            className="flex-row gap-3 items-center justify-center"
+          >
+            {/* Resume button (left) */}
+            <Animated.View 
+              style={animations.leftSplitStyle}
+              className="flex-1"
+            >
+              <PomodoroButton 
+                config={splitButtonsConfig.left}
+                className="px-2"
+                textSize="text-lg"
+              />
+            </Animated.View>
+
+            {/* Stop button (right) */}
+            <Animated.View 
+              style={animations.rightSplitStyle}
+              className="flex-1"
+            >
+              <PomodoroButton 
+                config={splitButtonsConfig.right}
+                className="px-2"
+                textSize="text-lg"
+              />
+            </Animated.View>
+          </Animated.View>
+        )}
       </View>
     </View>
   );

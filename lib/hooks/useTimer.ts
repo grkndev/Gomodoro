@@ -9,6 +9,7 @@ interface UseTimerProps {
 interface UseTimerReturn {
   timeRemaining: number; // seconds
   isRunning: boolean;
+  isPaused: boolean;
   isCompleted: boolean;
   progress: number; // 0-100
   formattedTime: string; // MM:SS
@@ -28,6 +29,7 @@ export const useTimer = ({
   const initialTime = initialSeconds;
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
   // Format time to MM:SS
@@ -45,10 +47,12 @@ export const useTimer = ({
     if (timeRemaining <= 0 || isCompleted) return;
     
     setIsRunning(true);
+    setIsPaused(false);
     intervalRef.current = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
           setIsRunning(false);
+          setIsPaused(false);
           setIsCompleted(true);
           if (!completionCalledRef.current) {
             completionCalledRef.current = true;
@@ -64,6 +68,7 @@ export const useTimer = ({
   // Pause timer function
   const pauseTimer = useCallback(() => {
     setIsRunning(false);
+    setIsPaused(true);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -73,6 +78,7 @@ export const useTimer = ({
   // Reset timer function
   const resetTimer = useCallback(() => {
     setIsRunning(false);
+    setIsPaused(false);
     setIsCompleted(false);
     setTimeRemaining(initialTime);
     completionCalledRef.current = false;
@@ -96,6 +102,7 @@ export const useTimer = ({
           const newTime = Math.max(0, prev - elapsedSeconds);
           if (newTime <= 0) {
             setIsRunning(false);
+            setIsPaused(false);
             setIsCompleted(true);
             if (!completionCalledRef.current) {
               completionCalledRef.current = true;
@@ -128,6 +135,7 @@ export const useTimer = ({
   return {
     timeRemaining,
     isRunning,
+    isPaused,
     isCompleted,
     progress: Math.min(100, Math.max(0, progress)), // Clamp between 0-100
     formattedTime: formatTime(timeRemaining),
