@@ -5,6 +5,7 @@ import {
   BottomSheetModal,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
+import { useTheme } from "@react-navigation/native";
 import React, { useCallback, useRef } from "react";
 import { Platform, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -43,16 +44,17 @@ const TaskSheet = () => {
   const handleSheetChanges = useCallback((index: number) => {
     console.log("handleSheetChanges", index);
   }, []);
+  const { dark } = useTheme();
 
   // renders
   return (
     <View className="w-full max-w-xs px-6">
       <TouchableOpacity
-        className="flex-row items-center justify-between bg-zinc-100 rounded-md p-2"
+        className="flex-row items-center justify-between bg-zinc-100 dark:bg-zinc-800 rounded-md p-2"
         onPress={handlePresentModalPress}
       >
-        <Text className="text-sm font-medium">Pomodoro #1</Text>
-        <Icons name="ChevronDown" size={24} color="black" />
+        <Text className="text-sm font-medium text-foreground">Pomodoro #1</Text>
+        <Icons name="ChevronDown" size={24} color={"#d4d4d8"} />
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}
