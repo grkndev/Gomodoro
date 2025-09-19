@@ -21,13 +21,13 @@ export default function ActivityScreen() {
             </Text>
           </View>
           <View className="flex-row gap-2">
-            <Text className="font-sans-normal text-zinc-500 text-xs">
+            <Text className="font-sans-normal text-muted-foreground text-xs">
               4 Eyl - 18 Eyl 2025
             </Text>
           </View>
         </Card>
         <Card className="flex-auto items-start gap-0">
-          <Text className="font-sans-semibold text-zinc-900 text-base">
+          <Text className="font-sans-semibold text-foreground text-base">
             Seri
           </Text>
           <View className="flex-row gap-2">
@@ -36,7 +36,7 @@ export default function ActivityScreen() {
             </Text>
           </View>
           <View className="flex-row gap-2">
-            <Text className="font-sans-normal text-zinc-500 text-xs">
+            <Text className="font-sans-normal text-muted-foreground text-xs">
               4 Eyl - 18 Eyl 2025
             </Text>
           </View>
@@ -45,7 +45,7 @@ export default function ActivityScreen() {
 
       <View className="w-full">
         <Card className="items-start gap-0 w-full p-4">
-          <Text className="font-sans-semibold text-zinc-900 text-base">
+          <Text className="font-sans-semibold text-foreground text-base">
             Favori seans
           </Text>
           <Text className="font-sans-bold text-green-500 text-2xl">
@@ -56,7 +56,7 @@ export default function ActivityScreen() {
 
       <View className=" flex-row gap-2 w-full">
         <Card className="flex-auto items-start justify-center">
-          <Text className="mb-1 font-sans-semibold text-zinc-900 text-xs text-wrap max-w-[80%]">
+          <Text className="mb-1 font-sans-semibold text-foreground text-xs text-wrap max-w-[80%]">
             Günlük seans
           </Text>
           <View className="flex-row gap-2">
@@ -66,7 +66,7 @@ export default function ActivityScreen() {
           </View>
         </Card>
         <Card className="flex-auto items-start justify-center gap-0">
-          <Text className="mb-1 font-sans-semibold text-zinc-900 text-xs text-wrap max-w-[80%]">
+          <Text className="mb-1 font-sans-semibold text-foreground text-xs text-wrap max-w-[80%]">
             En uzun seans
           </Text>
           <View className="flex-row gap-2">
@@ -75,7 +75,7 @@ export default function ActivityScreen() {
             </Text>
           </View>
           <View className="flex-row gap-2">
-            <Text className="font-sans-normal text-zinc-500 text-xs">
+            <Text className="font-sans-normal text-muted-foreground text-xs">
               12 Eyl 2025
             </Text>
           </View>

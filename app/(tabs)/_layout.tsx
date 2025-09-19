@@ -14,6 +14,7 @@ export default function TabLayout() {
           backgroundColor: "white",
           shadowColor: "white",
         },
+        
 
         // tabBarButton: () => null,
         tabBarShowLabel: false,
