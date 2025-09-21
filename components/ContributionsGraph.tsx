@@ -7,6 +7,7 @@ import {
 } from "@/lib/utils";
 import React from "react";
 import { View } from "react-native";
+import Animated, { ZoomIn } from "react-native-reanimated";
 import { Text } from "./ui/text";
 
 export default function ContributionsGraph() {
@@ -45,18 +46,20 @@ const ContributionBox = ({
 }): React.JSX.Element => {
   const level = calculateLevel(activity);
   return (
-    <View
+    <Animated.View
+      entering={ZoomIn.delay(day * 50).springify()}
       className={cn(
         "size-9 rounded-lg flex items-center justify-center",
-        
+
         level === ContributionLevel.VERY_HIGH && "bg-green-500",
-        level === ContributionLevel.HIGH      && "bg-green-500/75",
-        level === ContributionLevel.MEDIUM    && "bg-green-500/50",
-        level === ContributionLevel.LOW       && "bg-green-500/25",
-        level === ContributionLevel.NONE      && "bg-background border-border border bg-opacity-100"
+        level === ContributionLevel.HIGH && "bg-green-500/75",
+        level === ContributionLevel.MEDIUM && "bg-green-500/50",
+        level === ContributionLevel.LOW && "bg-green-500/25",
+        level === ContributionLevel.NONE &&
+          "bg-background border-border border bg-opacity-100"
       )}
     >
       <Text className="font-sans-normal text-foreground text-xs">{day}</Text>
-    </View>
+    </Animated.View>
   );
 };
