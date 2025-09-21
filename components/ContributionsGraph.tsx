@@ -12,7 +12,9 @@ export default function ContributionsGraph() {
   const weeks = chunkArray(days, 7);
   return (
     <View className="gap-2">
-      <Text className="font-sans-bold text-zinc-900 text-2xl">Eylül 2025</Text>
+      <Text className="font-sans-bold text-foreground text-2xl">
+        Eylül 2025
+      </Text>
       {weeks.map((week, index) => (
         <View key={index} className="flex-row gap-2">
           {week.map((day, index) => (
@@ -29,19 +31,19 @@ export default function ContributionsGraph() {
 
 const ContributionBox = ({
   activity,
-}: { 
+}: {
   activity: number;
 }): React.JSX.Element => {
   const level = calculateLevel(activity);
   return (
     <View
       className={cn(
-        "size-9 rounded-lg ",
-        level === "very-high" && "bg-green-500",
-        level === "high" && "bg-green-300",
-        level === "medium" && "bg-green-200",
-        level === "low" && "bg-green-100",
-        level === "none" && "bg-white border-zinc-200 border"
+        "size-9 rounded-lg bg-green-500",
+        level === "very-high" && "opacity-100",
+        level === "high" && "opacity-75",
+        level === "medium" && "opacity-50",
+        level === "low" && "opacity-25",
+        level === "none" && "bg-background border-border border"
       )}
     />
   );
