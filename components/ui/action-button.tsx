@@ -19,19 +19,19 @@ const actionButtonVariants = cva(
           Platform.select({ web: "hover:bg-[#17CB17]/90" })
         ),
         stop: cn(
-          "bg-red-300 border-red-500",
+          "bg-red-500/30 border-red-500",
           Platform.select({
             web: "hover:bg-[#FFA2A2]/90",
           })
         ),
         pause: cn(
-          "bg-orange-200 border-orange-500",
+          "bg-orange-500/30 border-orange-500",
           Platform.select({
             web: "hover:bg-orange-200/90",
           })
         ),
         resume: cn(
-          "bg-blue-200 border-blue-500",
+          "bg-blue-500/30 border-blue-500",
           Platform.select({ web: "hover:bg-blue-200/90" })
         ),
         custom: cn(
@@ -70,7 +70,7 @@ const actionButtonTextVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-primary-foreground",
+        default: "text-white",
         stop: "text-red-500",
         pause: "text-orange-500",
         resume: cn(

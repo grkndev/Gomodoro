@@ -3,12 +3,12 @@
  * Handles different states and haptic feedback
  */
 
-import React from 'react';
-import * as Haptics from 'expo-haptics';
-import { ActionButton } from './action-button';
-import { Text } from './text';
 import type { ButtonConfig, HapticIntensity } from '@/lib/types/pomodoro';
 import { getHapticIntensity } from '@/lib/utils/pomodoroHelpers';
+import * as Haptics from 'expo-haptics';
+import React from 'react';
+import { ActionButton } from './action-button';
+import { Text } from './text';
 
 interface PomodoroButtonProps {
   /** Button configuration */
@@ -64,7 +64,7 @@ export function PomodoroButton({
       size={size}
       className={className}
     >
-      <Text className={`${textSize} font-bold text-white`}>
+      <Text className={`${textSize} font-bold `}>
         {config.text}
       </Text>
     </ActionButton>
