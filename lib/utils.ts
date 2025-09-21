@@ -31,11 +31,17 @@ export function chunkArray(array: any[], size: number) {
 }
 
 export function calculateLevel(activity: number): ContributionLevel {
-  if (activity === 0) return "none";
-  if (activity < 25) return "low";
-  if (activity < 50) return "medium";
-  if (activity < 75) return "high";
-  return "very-high";
+  if (activity === 0) return ContributionLevel.NONE;
+  if (activity < 25) return ContributionLevel.LOW;
+  if (activity < 50) return ContributionLevel.MEDIUM;
+  if (activity < 75) return ContributionLevel.HIGH;
+  return ContributionLevel.VERY_HIGH;
 }
 
-export type ContributionLevel = "none" | "low" | "medium" | "high" | "very-high";
+export enum ContributionLevel {
+  NONE = "none",
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high",
+  VERY_HIGH = "very-high",
+}

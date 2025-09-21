@@ -1,4 +1,10 @@
-import { calculateLevel, chunkArray, cn, getDaysInMonth } from "@/lib/utils";
+import {
+  calculateLevel,
+  chunkArray,
+  cn,
+  ContributionLevel,
+  getDaysInMonth,
+} from "@/lib/utils";
 import React from "react";
 import { View } from "react-native";
 import { Text } from "./ui/text";
@@ -20,6 +26,7 @@ export default function ContributionsGraph() {
           {week.map((day, index) => (
             <ContributionBox
               key={index}
+              day={day}
               activity={Math.floor(Math.random() * 100)}
             />
           ))}
@@ -31,20 +38,25 @@ export default function ContributionsGraph() {
 
 const ContributionBox = ({
   activity,
+  day,
 }: {
   activity: number;
+  day: number;
 }): React.JSX.Element => {
   const level = calculateLevel(activity);
   return (
     <View
       className={cn(
-        "size-9 rounded-lg bg-green-500",
-        level === "very-high" && "opacity-100",
-        level === "high" && "opacity-75",
-        level === "medium" && "opacity-50",
-        level === "low" && "opacity-25",
-        level === "none" && "bg-background border-border border"
+        "size-9 rounded-lg flex items-center justify-center",
+        
+        level === ContributionLevel.VERY_HIGH && "bg-green-500",
+        level === ContributionLevel.HIGH      && "bg-green-500/75",
+        level === ContributionLevel.MEDIUM    && "bg-green-500/50",
+        level === ContributionLevel.LOW       && "bg-green-500/25",
+        level === ContributionLevel.NONE      && "bg-background border-border border bg-opacity-100"
       )}
-    />
+    >
+      <Text className="font-sans-normal text-foreground text-xs">{day}</Text>
+    </View>
   );
 };
