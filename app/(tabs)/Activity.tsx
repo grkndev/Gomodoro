@@ -12,7 +12,7 @@ export default function ActivityScreen() {
 
       <View className=" flex-row gap-2 w-full">
         <Card className="flex-auto items-start gap-0">
-          <Text className="font-sans-semibold text-zinc-900 text-base">
+          <Text className="font-sans-semibold text-foreground text-base">
             Seri
           </Text>
           <View className="flex-row gap-2">
@@ -26,18 +26,19 @@ export default function ActivityScreen() {
             </Text>
           </View>
         </Card>
+
         <Card className="flex-auto items-start gap-0">
           <Text className="font-sans-semibold text-foreground text-base">
-            Seri
+            En aktif gün
           </Text>
           <View className="flex-row gap-2">
             <Text className="font-sans-bold text-green-500 text-2xl">
-              15 Gün
+              15 Oturum
             </Text>
           </View>
           <View className="flex-row gap-2">
             <Text className="font-sans-normal text-muted-foreground text-xs">
-              4 Eyl - 18 Eyl 2025
+              8 Eyl 2025
             </Text>
           </View>
         </Card>

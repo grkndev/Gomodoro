@@ -1,7 +1,7 @@
 
 
 import "@/global.css";
-import { NAV_THEME } from "@/lib/theme";
+import { AppThemeProvider } from "@/lib/theme-provider";
 import {
   Montserrat_400Regular,
   Montserrat_500Medium,
@@ -12,10 +12,8 @@ import {
   useFonts,
 } from "@expo-google-fonts/montserrat";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import { ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 
 import * as SplashScreen from "expo-splash-screen";
 import React from "react";
@@ -46,13 +44,12 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
-        <ThemeProvider value={NAV_THEME["light"]}>
+        <AppThemeProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
           <PortalHost />
-          <StatusBar style="auto" />
-        </ThemeProvider>
+        </AppThemeProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );

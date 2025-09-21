@@ -1,18 +1,22 @@
 import Header from "@/components/Header";
 import Icons from "@/components/ui/icons";
+import { useTheme } from "@react-navigation/native";
 import { Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
+  const { colors } = useTheme();
   return (
     <Tabs
       screenOptions={{
         header: () => <Header />,
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.text,
         headerShown: true,
         tabBarStyle: {
-          backgroundColor: "white",
-          shadowColor: "white",
+          backgroundColor: colors.card,
+          borderTopColor: colors.border,
+          shadowColor: colors.card,
         },
         
 
@@ -24,9 +28,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => (
-            <Icons size={24} name="House" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Icons size={24} name="House" color={color} />,
         }}
       />
       <Tabs.Screen
