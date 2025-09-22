@@ -14,7 +14,7 @@ export default function HomeScreen() {
         size={width * 0.8}
         fontSize={width}
         strokeWidth={width * 0.05}
-        initialSeconds={25 * 60}
+        initialSeconds={1 * 60}
         onComplete={() => {
           console.log("Pomodoro session completed from HomeScreen!");
         }}

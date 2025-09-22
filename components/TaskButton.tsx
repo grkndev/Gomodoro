@@ -27,7 +27,7 @@ export const TaskButton: React.FC<TaskButtonProps> = ({
   const renderSessionDurations = () => {
     return sessions.sort((a, b) => a.step - b.step).map((session, index) => (
       <View key={session.id} className="flex-row items-center">
-        <Text className="text-xs text-gray-600">
+        <Text className="text-xs text-muted-foreground">
           {formatDuration(session.total_seconds)}
         </Text>
         {index < sessions.length - 1 && (
@@ -42,7 +42,7 @@ export const TaskButton: React.FC<TaskButtonProps> = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="bg-white rounded-3xl p-4 mb-3 border border-zinc-200"
+      className="bg-primary-foreground rounded-3xl p-4 mb-3 border border-border"
       style={{
         borderLeftWidth: 4,
         borderLeftColor: borderColor,
@@ -50,7 +50,7 @@ export const TaskButton: React.FC<TaskButtonProps> = ({
     >
       {/* Title Row */}
       <View className="mb-2">
-        <Text className="text-lg font-sans-medium text-gray-900">{title}</Text>
+        <Text className="text-lg font-sans-medium text-foreground">{title}</Text>
       </View>
       
       {/* Session Info Row */}

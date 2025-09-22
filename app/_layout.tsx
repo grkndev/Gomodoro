@@ -1,5 +1,3 @@
-
-
 import "@/global.css";
 import { AppThemeProvider } from "@/lib/theme-provider";
 import {
@@ -43,14 +41,14 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
-        <AppThemeProvider>
+      <AppThemeProvider>
+        <BottomSheetModalProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           </Stack>
           <PortalHost />
-        </AppThemeProvider>
-      </BottomSheetModalProvider>
+        </BottomSheetModalProvider>
+      </AppThemeProvider>
     </GestureHandlerRootView>
   );
 }
