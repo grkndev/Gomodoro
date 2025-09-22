@@ -102,12 +102,12 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           }}
         >
           <Text
-            className="font-sans-bold text-zinc-900 text-6xl"
+            className="font-sans-bold  text-6xl"
            
           >
             {title}
           </Text>
-          <Text className="font-sans-semibold text-zinc-400">{subtitle}</Text>
+          <Text className="font-sans-semibold text-muted-foreground">{subtitle}</Text>
         </View>
       )}
     </View>

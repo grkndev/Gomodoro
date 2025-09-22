@@ -9,7 +9,11 @@ import Animated from "react-native-reanimated";
 
 import CircularProgressBar from "@/components/ui/circular-progress";
 import { PomodoroButton } from "@/components/ui/pomodoro-button";
-import { LAYOUT_DIMENSIONS, POMODORO_COLORS, POMODORO_DEFAULTS } from "@/lib/constants/pomodoro";
+import {
+  LAYOUT_DIMENSIONS,
+  POMODORO_COLORS,
+  POMODORO_DEFAULTS,
+} from "@/lib/constants/pomodoro";
 import { usePomodoroAnimations } from "@/lib/hooks/usePomodoroAnimations";
 import { useTimer } from "@/lib/hooks/useTimer";
 import type { PomodoroTimerProps } from "@/lib/types/pomodoro";
@@ -19,7 +23,7 @@ import {
   getSplitButtonsConfig,
   getTimerState,
 } from "@/lib/utils/pomodoroHelpers";
-
+import { useTheme } from "@react-navigation/native";
 
 export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   initialSeconds = POMODORO_DEFAULTS.INITIAL_SECONDS,
@@ -31,22 +35,22 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
   totalSessions = POMODORO_DEFAULTS.DEFAULT_SESSIONS,
 }) => {
   // Timer logic
-  const { 
-    timeRemaining, 
-    isRunning, 
+  const {
+    timeRemaining,
+    isRunning,
     isPaused,
-    isCompleted, 
-    progress, 
-    formattedTime, 
-    startTimer, 
-    pauseTimer, 
-    resetTimer 
-  } = useTimer({ 
+    isCompleted,
+    progress,
+    formattedTime,
+    startTimer,
+    pauseTimer,
+    resetTimer,
+  } = useTimer({
     initialSeconds,
     onComplete: () => {
       console.log("Pomodoro session completed!");
       onComplete?.();
-    }
+    },
   });
 
   // Determine current state and get animations
@@ -64,8 +68,7 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
     onResume: startTimer,
     onStop: resetTimer,
   });
-
-
+  const { dark } = useTheme();
 
   return (
     <View className="items-center gap-16 w-full">
@@ -75,21 +78,28 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         size={size}
         strokeWidth={strokeWidth}
         color={POMODORO_COLORS.PRIMARY_GREEN}
+        backgroundColor={dark ? "#18181b" : "#e5e7eb"}
         title={formattedTime}
         subtitle={formatSessionInfo(currentSession, totalSessions)}
       />
 
-      <View 
-        className="w-full items-center justify-center" 
+      <View
+        className="w-full items-center justify-center"
         style={{ minHeight: LAYOUT_DIMENSIONS.BUTTON_CONTAINER_MIN_HEIGHT }}
       >
         {/* Main morphing button - appears for idle, running, completed states */}
-        {timerState !== 'paused' && (
-          <Animated.View 
-            style={[animations.morphingButtonStyle, { width: LAYOUT_DIMENSIONS.MAIN_BUTTON_WIDTH, position: 'absolute' }]}
+        {timerState !== "paused" && (
+          <Animated.View
+            style={[
+              animations.morphingButtonStyle,
+              {
+                width: LAYOUT_DIMENSIONS.MAIN_BUTTON_WIDTH,
+                position: "absolute",
+              },
+            ]}
             className="rounded-full"
           >
-            <PomodoroButton 
+            <PomodoroButton
               config={mainButtonConfig}
               className="w-full bg-transparent border-transparent"
             />
@@ -97,17 +107,17 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
         )}
 
         {/* Split buttons container - appears when paused */}
-        {timerState === 'paused' && (
-          <Animated.View 
-            style={[animations.splitContainerStyle, { width: LAYOUT_DIMENSIONS.SPLIT_CONTAINER_WIDTH }]}
+        {timerState === "paused" && (
+          <Animated.View
+            style={[
+              animations.splitContainerStyle,
+              { width: LAYOUT_DIMENSIONS.SPLIT_CONTAINER_WIDTH },
+            ]}
             className="flex-row gap-3 items-center justify-center"
           >
             {/* Resume button (left) */}
-            <Animated.View 
-              style={animations.leftSplitStyle}
-              className="flex-1"
-            >
-              <PomodoroButton 
+            <Animated.View style={animations.leftSplitStyle} className="flex-1">
+              <PomodoroButton
                 config={splitButtonsConfig.left}
                 className="px-2"
                 textSize="text-lg"
@@ -115,11 +125,11 @@ export const PomodoroTimer: React.FC<PomodoroTimerProps> = ({
             </Animated.View>
 
             {/* Stop button (right) */}
-            <Animated.View 
+            <Animated.View
               style={animations.rightSplitStyle}
               className="flex-1"
             >
-              <PomodoroButton 
+              <PomodoroButton
                 config={splitButtonsConfig.right}
                 className="px-2"
                 textSize="text-lg"

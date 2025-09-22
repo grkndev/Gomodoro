@@ -1,5 +1,6 @@
 import { Text } from "@/components/ui/text";
 import { currentPomodoro } from "@/lib/hooks/usePomodoro";
+import { THEME } from "@/lib/theme";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -73,8 +74,14 @@ const TaskSheet = () => {
           overflow: "hidden",
           borderRadius: BORDER_RADIUS,
         }}
+        handleStyle={{
+          backgroundColor: dark ? THEME.dark.primaryForeground : THEME.light.primaryForeground,
+          borderTopLeftRadius: BORDER_RADIUS,
+          borderTopRightRadius: BORDER_RADIUS,
+        
+        }}
         handleIndicatorStyle={{
-          backgroundColor: "#D1D5DB",
+          backgroundColor: dark ? THEME.dark.secondary : THEME.light.secondaryForeground,
           width: 50,
         }}
         backdropComponent={(props) => (
@@ -87,7 +94,7 @@ const TaskSheet = () => {
         )}
       >
         <BottomSheetView
-          className="flex-1 px-5"
+          className="flex-1 px-5 bg-primary-foreground"
           style={{
             paddingBottom: Platform.select({
               ios: insets.bottom + 12,
@@ -95,7 +102,7 @@ const TaskSheet = () => {
             }),
           }}
         >
-          <Text className="text-xl font-sans-semibold text-gray-900 mb-4">
+          <Text className="text-xl font-sans-semibold text-foreground mb-4">
             Select Pomodoro Session
           </Text>
 
