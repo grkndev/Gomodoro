@@ -1,17 +1,19 @@
 import Header from "@/components/Header";
 import Icons from "@/components/ui/icons";
-import { useTheme } from "@react-navigation/native";
+import { THEME } from "@/lib/theme";
+import { useAppTheme } from "@/lib/theme-provider";
 import { Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
-  const { colors } = useTheme();
+  const { isDark } = useAppTheme();
+  const colors = THEME[isDark ? "dark" : "light"];
   return (
     <Tabs
       screenOptions={{
         header: () => <Header />,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.text,
+        tabBarActiveTintColor: colors.mutedForeground,
+        tabBarInactiveTintColor: colors.foreground,
         headerShown: true,
         tabBarStyle: {
           backgroundColor: colors.card,
